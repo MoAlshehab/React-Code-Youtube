@@ -1,0 +1,30 @@
+                                                        ///DATABASE ///
+
+1- Eerst ga je nieuwe database maken in de SQL .
+2- Kopel je je datebase met een naam en een wachtwoord in mysQL.
+3-Ga je naar laravel /config/database.php => daar pas je naam en wachtwoord en meer.
+4-Ga je naar terminal en type: php artisan make:model product -mcr
+5-Ga je naar Laravel/migrations/open de bestand van zelfde naam als tabel in dit gevaal is (product) en pas dat.
+   public function up()
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->text('description');
+            $table->text('imge');
+            $table->timestamps();
+        });
+    }
+
+
+6-Ga je naar terminal en type : php artisan migrate .(nu wordt een datebase gemaakt met tabels).
+7-Ga je naar Laravel/Model/ open de Model van je database en voeg je de gegevens bijvoorbeeld : protected $fillable = ['tital', 'descripcion', 'image'];
+8- Ga je naar Laravel /controller/ open je controller die zelfde naam heeft en voeg deze users :use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+
+9-daarna ga je naar beneden bij index voeg je dat:
+   public function index()
+    {
+        return Product::select('id', 'title', 'description', 'image')->get();
+    }
+
